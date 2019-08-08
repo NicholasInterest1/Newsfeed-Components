@@ -99,46 +99,58 @@ const data = [
 //   <span class='expandButton'></span>
 // </div>
 
-let testingIt = document.querySelector(".articles");
+const article = document.querySelector(".articles"); //initial declaration---selects all of the items called .articles, querySelector returns the first item that matches
+
 data.forEach(data => {
-  testingIt.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
-});
+  article.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+}); //loops through and returns all of the key/value pairs (data = array name or key AND title = value) within the array called
 
-function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
 
-  const article = document.createElement("div");
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) { //passes in the arguments of title, etc.
+  const article = document.createElement("div"); //creates the element and assigns the type of element (i.e.; article is a div)
+  const articleSection = document.createElement("div");
   const articleTitle = document.createElement("h2");
   const articleDate = document.createElement("p");
+  const buttonOpen = document.createElement("span");
+  const pContainer = document.createElement("div");
   const articleP1 = document.createElement("p");
   const articleP2 = document.createElement("p");
   const articleP3 = document.createElement("p");
-  const articleButton = document.createElement("span");
 
-  article.appendChild(articleTitle);
-  articleTitle.appendChild(articleDate);
-  articleDate.appendChild(articleP1);
-  articleP1.appendChild(articleP2);
-  articleP2.appendChild(articleP3);
-  articleP3.appendChild(articleButton);
+  article.appendChild(articleSection); //creates a node of the parent- the parent-node is article, child-node is articleSection
+  articleSection.appendChild(articleTitle);
+  articleSection.appendChild(articleDate);
+  articleSection.appendChild(buttonOpen);
+  articleSection.appendChild(pContainer);
+  pContainer.appendChild(articleP1);
+  pContainer.appendChild(articleP2);
+  pContainer.appendChild(articleP3);
 
-  article.classList.add("article");
-  articleP1.classList.add("date");
-  articleButton.classList.add("expandButton");
+  article.classList.add("article") //creates the class name for the variable- article is a div with a class of "article"
+  articleSection.classList.add("article-open")
+  buttonOpen.classList.add("expandButton")
+  pContainer.classList.add("p-container")
 
-  return article;
+  const open = "\u2b9f"; //unicode for the symbol that displays on the buttonOpen span
+  articleTitle.textContent = title; //tells the DOM what text should be displayed for each element
+  articleDate.textContent = date;
+  articleP1.textContent = firstParagraph;
+  articleP2.textContent = secondParagraph;
+  articleP3.textContent = thirdParagraph;
+  buttonOpen.textContent = open; //calls the unicode symbol
+
+  buttonOpen.addEventListener('click', () => { //adds event listener of "click" to the buttonOpen, says do X when I click it
+    article.classList.toggle("toggle-on"); //toggle-on is outlined in the article.less file
+    pContainer.classList.toggle("p-container-open") //p-container-open is outlined in article.less file
+  })
+
+  return article //returns the declaration outlined above
 }
+
+
 // Hint: You will need to use createElement more than once here!
-
 // Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
-
 // Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
-expandButton.addEventListener('click', (e) => {
-  testingIt.classList.toggle("article-open");
-})
-  
-
 // Step 3: return the entire component.
-
 // Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
-
 // Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible

@@ -45,6 +45,17 @@ body {
 .articles {
   margin-top: 95px;
 }
+.articles .toggle-on {
+  margin: 20px 10%;
+  padding: 0 20px 25px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  background-color: white;
+  position: relative;
+  height: auto;
+  overflow: hidden;
+  box-shadow: 2px 2px 2px lightgrey;
+}
 .article {
   margin: 20px 10%;
   padding: 0 20px 25px;
@@ -52,9 +63,17 @@ body {
   border-radius: 10px;
   background-color: white;
   position: relative;
-  height: 50px;
+  height: 100px;
   overflow: hidden;
-  box-shadow: 2px 2px 2px lightgrey;
+  box-shadow: 2px 2px 2px pink;
+}
+.article .p-container {
+  display: none;
+  transition: all 1.4s ease;
+}
+.article .p-container-open {
+  display: block;
+  transition: all 1.4s ease;
 }
 .article h2 {
   font-size: 28px;
